@@ -229,10 +229,6 @@ collectd_SOURCES = src/daemon/collectd.c \
 	src/daemon/utils_threshold.h \
 	src/write_gcm.c
 
-collectd_LIBADD = \
-	$(BUILD_WITH_LIBYAJL_LIBS) \
-	$(BUILD_WITH_LIBCURL_LIBS) \
-	libstackdriver_json.la
 
 collectd_CFLAGS = $(AM_CFLAGS) $(BUILD_WITH_LIBYAJL_CPPFLAGS) $(BUILD_WITH_LIBCURL_CFLAGS)
 collectd_CPPFLAGS = $(AM_CPPFLAGS)
@@ -245,11 +241,14 @@ collectd_LDADD = \
 	liboconfig.la \
 	-lm \
 	$(COMMON_LIBS) \
-	$(DLOPEN_LIBS)
+	$(DLOPEN_LIBS) \
+	$(BUILD_WITH_LIBYAJL_LIBS) \
+	$(BUILD_WITH_LIBCURL_LIBS) \
+	libstackdriver_json.la
 
 if BUILD_WITH_LIBSSL
 collectd_CFLAGS += $(BUILD_WITH_LIBSSL_CFLAGS) 
-collectd_LIBADD += $(BUILD_WITH_LIBSSL_LIBS)
+collectd_LDADD += $(BUILD_WITH_LIBSSL_LIBS)
 endif
 
 if BUILD_FEATURE_DAEMON
