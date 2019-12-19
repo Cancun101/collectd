@@ -1231,7 +1231,7 @@ static int wg_oauth2_parse_result(char **result_buffer, size_t *result_size,
     return -1;
   }
 
-  char *access_token;
+  char *access_token = "";
   if (wg_extract_toplevel_json_string(json, "access_token", &access_token)
       != 0) {
     ERROR("write_gcm: Can't find access_token in result.");
