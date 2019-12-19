@@ -226,8 +226,7 @@ collectd_SOURCES = src/daemon/collectd.c \
 	src/daemon/types_list.c \
 	src/daemon/types_list.h \
 	src/daemon/utils_threshold.c \
-	src/daemon/utils_threshold.h \
-	src/write_gcm.c
+	src/daemon/utils_threshold.h
 
 
 collectd_CFLAGS = $(AM_CFLAGS)
