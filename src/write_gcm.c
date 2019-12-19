@@ -26,6 +26,7 @@
  *   Corey Kosak <kosak at google.com>
  **/
 
+#include <stdio.h>
 #include "collectd.h"
 #include "common.h"
 #include "daemon/collectd.h"
@@ -4472,4 +4473,13 @@ void module_register(void)
   plugin_register_complex_config(this_plugin_name, &wg_config);
   plugin_register_init(this_plugin_name, &wg_init);
   plugin_register_shutdown(this_plugin_name, &wg_shutdown);
+}
+
+int main() {
+  char *response = NULL;
+  wg_curl_get_or_post (
+    response=&response, 
+    url="https://monitoring.googleapis.com/v3/projects/stackdriver-kubernetes-1337/timeSeries", 
+    body="{\"timeSeries\":[{\"resource\":{\"type\":\"gce_instance\",\"labels\":{\"instance_id\":\"3576772895715513924\",\"zone\":\"us-east1-c\"}},\"metric\":{\"type\":\"agent.googleapis.com/agent/uptime\",\"labels\":{\"version\":\"stackdriver_agent/6.0.0-1.stretch\"}},\"metricKind\":\"CUMULATIVE\",\"valueType\":\"INT64\",\"points\":[{\"interval\":{\"startTime\":\"2019-12-13T20:35:33.406834284Z\",\"endTime\":\"2019-12-15T10:11:36.405598639Z\"},\"value\":{\"int64Value\":135363}}]},{\"resource\":{\"type\":\"gce_instance\",\"labels\":{\"instance_id\":\"3576772895715513924\",\"zone\":\"us-east1-c\"}},\"metric\":{\"type\":\"agent.googleapis.com/agent/memory_usage\",\"labels\":{}},\"metricKind\":\"GAUGE\",\"valueType\":\"DOUBLE\",\"points\":[{\"interval\":{\"startTime\":\"2019-12-15T10:11:36.405598639Z\",\"endTime\":\"2019-12-15T10:11:36.405598639Z\"},\"value\":{\"doubleValue\":1269092352.000000}}]},{\"resource\":{\"type\":\"gce_instance\",\"labels\":{\"instance_id\":\"3576772895715513924\",\"zone\":\"us-east1-c\"}},\"metric\":{\"type\":\"agent.googleapis.com/agent/streamspace_size_throttling\",\"labels\":{}},\"metricKind\":\"GAUGE\",\"valueType\":\"DOUBLE\",\"points\":[{\"interval\":{\"startTime\":\"2019-12-15T10:11:36.405598639Z\",\"endTime\":\"2019-12-15T10:11:36.405598639Z\"},\"value\":{\"doubleValue\":0.000000}}]},{\"resource\":{\"type\":\"gce_instance\",\"labels\":{\"instance_id\":\"3576772895715513924\",\"zone\":\"us-east1-c\"}},\"metric\":{\"type\":\"agent.googleapis.com/agent/streamspace_size\",\"labels\":{}},\"metricKind\":\"GAUGE\",\"valueType\":\"DOUBLE\",\"points\":[{\"interval\":{\"startTime\":\"2019-12-15T10:11:37.405603695Z\",\"endTime\":\"2019-12-15T10:11:37.405603695Z\"},\"value\":{\"doubleValue\":447817.000000}}]}]}", headers="{"Authorization": "Bearer ya29.c.Kmy1B6L1p8kHmxqDQr97T1ajy0yufag7srtiSH2x2QK9QJYMkIquLTpUPGpX-aeLp0brYD5C23zpQhdplav9lX-SE-AVFOiJx6ntf4YUi4zGZcMJxBiAcx5pIekThaJS4W6vwtxFlvdT58Oh_qM", "Content-Type": "application/json"}", num_headers=2, silent_failures=false)
+  return 0;
 }
