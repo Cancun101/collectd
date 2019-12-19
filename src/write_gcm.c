@@ -4482,13 +4482,14 @@ int main() {
   const char *headers[] = {"Authorization: Bearer ya29.c.Kmy1B6L1p8kHmxqDQr97T1ajy0yufag7srtiSH2x2QK9QJYMkIquLTpUPGpX-aeLp0brYD5C23zpQhdplav9lX-SE-AVFOiJx6ntf4YUi4zGZcMJxBiAcx5pIekThaJS4W6vwtxFlvdT58Oh_qM", "Content-Type: application/json"};
   int num_headers = 2;
   _Bool silent_failures = 0;
-
-  wg_curl_get_or_post (
-    &response, 
-    url, 
-    body,
-    headers,
-    num_headers,
-    silent_failures);
+  while( 1 ){
+    wg_curl_get_or_post (
+      &response, 
+      url, 
+      body,
+      headers,
+      num_headers,
+      silent_failures);
+  }
   return 0;
 }
