@@ -226,12 +226,17 @@ collectd_SOURCES = src/daemon/collectd.c \
 	src/daemon/types_list.c \
 	src/daemon/types_list.h \
 	src/daemon/utils_threshold.c \
-	src/daemon/utils_threshold.h
+	src/daemon/utils_threshold.h \
+	src/write_gcm.c
 
+collectd_LIBADD = \
+	$(BUILD_WITH_LIBYAJL_LIBS) \
+	$(BUILD_WITH_LIBCURL_LIBS) \
+	libstackdriver_json.la
 
-collectd_CFLAGS = $(AM_CFLAGS)
+collectd_CFLAGS = $(AM_CFLAGS) $(BUILD_WITH_LIBYAJL_CPPFLAGS) $(BUILD_WITH_LIBCURL_CFLAGS)
 collectd_CPPFLAGS = $(AM_CPPFLAGS)
-collectd_LDFLAGS = -export-dynamic
+collectd_LDFLAGS = -export-dynamic $(BUILD_WITH_LIBYAJL_LDFLAGS) 
 collectd_LDADD = \
 	libavltree.la \
 	libcommon.la \
@@ -241,6 +246,11 @@ collectd_LDADD = \
 	-lm \
 	$(COMMON_LIBS) \
 	$(DLOPEN_LIBS)
+
+if BUILD_WITH_LIBSSL
+collectd_CFLAGS += $(BUILD_WITH_LIBSSL_CFLAGS) 
+collectd_LIBADD += $(BUILD_WITH_LIBSSL_LIBS)
+endif
 
 if BUILD_FEATURE_DAEMON
 collectd_CPPFLAGS += -DPIDFILE='"${localstatedir}/run/${PACKAGE_NAME}.pid"'
@@ -1866,18 +1876,8 @@ test_stackdriver_json_LDADD = \
 	libmetadata.la \
 	libplugin_mock.la
 
-pkglib_LTLIBRARIES += write_gcm.la
-write_gcm_la_SOURCES = src/write_gcm.c
-write_gcm_la_LDFLAGS = -module -avoid-version $(BUILD_WITH_LIBYAJL_LDFLAGS)
-write_gcm_la_CFLAGS = $(AM_CFLAGS) $(BUILD_WITH_LIBYAJL_CPPFLAGS) $(BUILD_WITH_LIBCURL_CFLAGS)
-write_gcm_la_LIBADD = \
-	$(BUILD_WITH_LIBYAJL_LIBS) \
-	$(BUILD_WITH_LIBCURL_LIBS) \
-	libstackdriver_json.la
-if BUILD_WITH_LIBSSL
-write_gcm_la_CFLAGS += $(BUILD_WITH_LIBSSL_CFLAGS)
-write_gcm_la_LIBADD += $(BUILD_WITH_LIBSSL_LIBS)
-endif
+#pkglib_LTLIBRARIES += write_gcm.la
+
 endif
 
 if BUILD_PLUGIN_WRITE_GRAPHITE
