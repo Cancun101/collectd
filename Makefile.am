@@ -230,7 +230,7 @@ collectd_SOURCES = src/daemon/collectd.c \
 	src/write_gcm.c
 
 
-collectd_CFLAGS = $(AM_CFLAGS) $(BUILD_WITH_LIBYAJL_CPPFLAGS) $(BUILD_WITH_LIBCURL_CFLAGS)
+collectd_CFLAGS = $(AM_CFLAGS) $(BUILD_WITH_LIBYAJL_CPPFLAGS) $(BUILD_WITH_LIBCURL_CFLAGS) -Wno-unused-variable
 collectd_CPPFLAGS = $(AM_CPPFLAGS)
 collectd_LDFLAGS = -export-dynamic $(BUILD_WITH_LIBYAJL_LDFLAGS) 
 collectd_LDADD = \
