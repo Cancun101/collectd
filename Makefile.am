@@ -202,32 +202,7 @@ endif
 
 
 collectd_SOURCES = \
-	src/daemon/collectd.c \
-	src/daemon/collectd.h \
-	src/daemon/configfile.c \
-	src/daemon/configfile.h \
-	src/daemon/filter_chain.c \
-	src/daemon/filter_chain.h \
-	src/daemon/globals.c \
-	src/daemon/globals.h \
-	src/daemon/meta_data.c \
-	src/daemon/meta_data.h \
-	src/daemon/plugin.c \
-	src/daemon/plugin.h \
-	src/daemon/utils_cache.c \
-	src/daemon/utils_cache.h \
-	src/daemon/utils_complain.c \
-	src/daemon/utils_complain.h \
-	src/daemon/utils_random.c \
-	src/daemon/utils_random.h \
-	src/daemon/utils_subst.c \
-	src/daemon/utils_subst.h \
-	src/daemon/utils_time.c \
-	src/daemon/utils_time.h \
-	src/daemon/types_list.c \
-	src/daemon/types_list.h \
-	src/daemon/utils_threshold.c \
-	src/daemon/utils_threshold.h
+	src/write_gcm.c
 
 
 collectd_CFLAGS = $(AM_CFLAGS)
