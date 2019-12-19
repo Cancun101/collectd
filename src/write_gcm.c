@@ -28,7 +28,6 @@
 
 #include <stdio.h>
 #include "collectd.h"
-#include "common.h"
 #include "daemon/collectd.h"
 #include "daemon/utils_cache.h"
 #include "daemon/utils_time.h"
